@@ -1,0 +1,55 @@
+.list-item {
+    display: flex;
+    background-color: white;
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    margin-bottom: 12px;
+    overflow: hidden;
+}
+
+.list-item-indicator {
+    width: 8px;
+}
+
+.list-item-indicator.visited {
+    background-color: var(--visited-color);
+}
+
+.list-item-indicator.not-visited {
+    background-color: var(--not-visited-color);
+}
+
+.list-item-content {
+    flex: 1;
+    padding: 12px;
+}
+
+.list-item-title {
+    font-weight: 600;
+    margin-bottom: 2px;
+}
+
+.list-item-subtitle {
+    font-size: 12px;
+    color: #7f8c8d;
+    margin-bottom: 8px;
+}
+
+.list-item-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 12px;
+}
+
+.list-item-tag {
+    background-color: var(--light-color);
+    padding: 2px 8px;
+    border-radius: 10px;
+}
+
+.list-item-actions {
+    display: flex;
+    align-items: center;
+    padding: 12px;
+}

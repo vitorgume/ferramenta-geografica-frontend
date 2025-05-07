@@ -1,4 +1,4 @@
-import { GoogleMap, Marker, LoadScript } from "@react-google-maps/api";
+import { GoogleMap, Marker } from "@react-google-maps/api";
 import { useState } from "react";
 
 const mapContainerStyle = {
@@ -11,41 +11,39 @@ const defaultCenter = {
     lng: -51.933007534991326
 };
 
-export default function Mapa({ empresas }) {
+export default function Mapa({ empresas, onAbrirDetalhes }) {
     const [currentCenter] = useState(defaultCenter);
 
     return (
         <>
-            <LoadScript googleMapsApiKey={import.meta.env.VITE_GOOGLE_MAPS_API_KEY}>
-                <GoogleMap
-                    mapContainerStyle={mapContainerStyle}
-                    center={currentCenter}
-                    zoom={14}
-                >
-                    {empresas.map((empresa, index) => {
-                        const coords = empresa.endereco?.cordenadas;
-                        if (!coords || !coords.latitude || !coords.longitude) return null;
+            <GoogleMap
+                mapContainerStyle={mapContainerStyle}
+                center={currentCenter}
+                zoom={14}
+            >
+                {Array.isArray(empresas) && empresas.map((empresa, index) => {
+                    const coords = empresa.endereco?.cordenadas;
+                    if (!coords || !coords.latitude || !coords.longitude) return null;
 
-                        const lat = parseFloat(coords.latitude);
-                        const lng = parseFloat(coords.longitude);
-                        if (isNaN(lat) || isNaN(lng)) return null;
+                    const lat = parseFloat(coords.latitude);
+                    const lng = parseFloat(coords.longitude);
+                    if (isNaN(lat) || isNaN(lng)) return null;
 
-                        return (
-                            <Marker
-                                key={index}
-                                position={{ lat, lng }}
-                                title={empresa.nomeFantasia}
-                                icon={
-                                    empresa.visitado
-                                        ? "http://maps.google.com/mapfiles/ms/icons/green-dot.png"
-                                        : "http://maps.google.com/mapfiles/ms/icons/red-dot.png"
-                                }
-                                onClick={() => console.log(empresa)}
-                            />
-                        );
-                    })}
-                </GoogleMap>
-            </LoadScript>
+                    return (
+                        <Marker
+                            key={index}
+                            position={{ lat, lng }}
+                            title={empresa.nomeFantasia}
+                            icon={
+                                empresa.visitado
+                                    ? "http://maps.google.com/mapfiles/ms/icons/green-dot.png"
+                                    : "http://maps.google.com/mapfiles/ms/icons/red-dot.png"
+                            }
+                            onClick={() => onAbrirDetalhes(empresa)}
+                        />
+                    );
+                })}
+            </GoogleMap>
         </>
     );
 }
