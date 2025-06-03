@@ -1,53 +1,97 @@
 import './filterPanel.css';
+import FilterHeader from './header/filterHeader';
+import FilterGroup from './grupos/filterGroup';
+import { useState } from "react";
 
-export default function FilterPanel({ aberto, onClose  }) {
+const segmento = {
+    titulo: 'Segmento',
+    filtros: [
+        {
+            valor: 'Oficina Mecânica',
+        },
+        {
+            valor: 'Troca de Óleo',
+        },
+        {
+            valor: 'Pneus',
+        },
+        {
+            valor: 'Auto Peças',
+        }
+    ]
+}
+
+const status = {
+    titulo: 'Status',
+    filtros: [
+        {
+            valor: 'Visitado',
+        },
+        {
+            valor: 'Não Visitado',
+        }
+    ]
+}
+
+const regiao = {
+    titulo: 'Região',
+    filtros: [
+        {
+            valor: 'Norte',
+        },
+        {
+            valor: 'Sul',
+        },
+        {
+            valor: 'Leste'
+        },
+        {
+            valor: 'Oeste'
+        }, 
+        {
+            valor: 'Central'
+        }
+    ]
+}
+
+
+export default function FilterPanel({ aberto, onClose, onApplyFilters }) {
+
+    const [filtrosSelecionados, setFiltrosSelecionados] = useState({
+        segmento: [],
+        status: [],
+        regiao: []
+    });
+
+    function toggleFiltro(categoria, valor) {
+        setFiltrosSelecionados(prev => {
+            const atual = prev[categoria];
+            return {
+                ...prev,
+                [categoria]: atual.includes(valor)
+                    ? atual.filter(v => v !== valor)
+                    : [...atual, valor]
+            };
+        });
+    }
+
     return(
         <div className={`filters-panel ${aberto ? "expanded" : ""}`}>
-            <div className="filter-handle" id="filter-handle"></div>
-            <div className="filters-header">
-                <h2>Filtros</h2>
-                <button className="icon-button" 
-                        id="close-filters" 
-                        style={{color: "var(--text-color)"}}
-                        onClick={onClose}
-                >
-                    <i className="fas fa-times"></i>
-                </button>
-            </div>
+            <div className="filter-handle"></div>
+            <FilterHeader onClose={onClose}/>
             <div className="filters-content">
-                <div className="filter-group">
-                    <h3>Segmento</h3>
-                    <div className="filter-options">
-                        <span className="filter-chip" data-filter="segment" data-value="oficina">Oficina Mecânica</span>
-                        <span className="filter-chip" data-filter="segment" data-value="oleo">Troca de Óleo</span>
-                        <span className="filter-chip" data-filter="segment" data-value="pneus">Pneus</span>
-                        <span className="filter-chip" data-filter="segment" data-value="auto-pecas">Auto Peças</span>
-                    </div>
-                </div>
-                <div className="filter-group">
-                    <h3>Status</h3>
-                    <div className="filter-options">
-                        <span className="filter-chip" data-filter="status" data-value="visited">Visitado</span>
-                        <span className="filter-chip" data-filter="status" data-value="not-visited">Não Visitado</span>
-                    </div>
-                </div>
-                <div className="filter-group">
-                    <h3>Região</h3>
-                    <div className="filter-options">
-                        <span className="filter-chip" data-filter="region" data-value="north">Norte</span>
-                        <span className="filter-chip" data-filter="region" data-value="south">Sul</span>
-                        <span className="filter-chip" data-filter="region" data-value="east">Leste</span>
-                        <span className="filter-chip" data-filter="region" data-value="west">Oeste</span>
-                        <span className="filter-chip" data-filter="region" data-value="central">Central</span>
-                    </div>
-                </div>
+                <FilterGroup titulo="Segmento" filtros={segmento.filtros} categoria="segmento" onToggle={toggleFiltro} selecionados={filtrosSelecionados.segmento}/>
+                <FilterGroup titulo="Status" filtros={status.filtros} categoria="status" onToggle={toggleFiltro} selecionados={filtrosSelecionados.status}/>
+                <FilterGroup titulo="Região" filtros={regiao.filtros} categoria="regiao" onToggle={toggleFiltro} selecionados={filtrosSelecionados.regiao}/>
             </div>
             <div className="filters-actions">
-                <button className="btn btn-secondary" id="reset-filters">Limpar</button>
+                <button className="btn btn-secondary" onClick={() => setFiltrosSelecionados({ segmento: [], status: [], regiao: [] })}>Limpar</button>
                 <button 
                     className="btn btn-primary" 
-                    id="apply-filters"
-                    onClick={onClose}
+                    onClick={() => {
+                        onApplyFilters(filtrosSelecionados);
+                        onClose();
+                    }}
                 >Aplicar</button>
             </div>
         </div>

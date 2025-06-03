@@ -14,7 +14,24 @@ export default function MapaEmpresa() {
     const [searchAberto, setSearchAberto] = useState(false);
     const [detalhesEmpresaAberto, setDetalhesEmpresaAberto] = useState(false);
     const [empresaSelecionada, setEmpresaSelecionada] = useState(null);
+    const [filtros, setFiltros] = useState(null);
 
+    function filtrarEmpresas(empresas) {
+    if (!filtros) return empresas;
+
+    return empresas.filter(emp => {
+        console.log('Empresa: ', emp);
+        const segmento = emp.segmentoDescricao; 
+        const status = emp.visitado ? 'Visitado' : 'Não Visitado';
+        const regiao = emp.endereco?.regiao; 
+
+        const matchSegmento = filtros.segmento.length === 0 || filtros.segmento.includes(segmento);
+        const matchStatus = filtros.status.length === 0 || filtros.status.includes(status);
+        const matchRegiao = filtros.regiao.length === 0 || filtros.regiao.includes(regiao);
+
+        return matchSegmento && matchStatus && matchRegiao;
+    });
+}
 
     function handleToggleFiltro() {
         setFiltroAberto(prev => !prev);
@@ -26,9 +43,9 @@ export default function MapaEmpresa() {
                 emp.id === empresaAtualizada.id ? empresaAtualizada : emp
             )
         );
-        setEmpresaSelecionada(empresaAtualizada); // atualiza também no painel de detalhes
+        setEmpresaSelecionada(empresaAtualizada); 
     }
-    
+
 
     useEffect(() => {
         async function carregarEmpresas() {
@@ -49,9 +66,10 @@ export default function MapaEmpresa() {
             <FilterPanel
                 aberto={filtroAberto}
                 onClose={() => setFiltroAberto(false)}
+                onApplyFilters={setFiltros}
             />
             <Mapa
-                empresas={empresas}
+                empresas={filtrarEmpresas(empresas)}
                 onAbrirDetalhes={(empresa) => {
                     setEmpresaSelecionada(empresa);
                     setDetalhesEmpresaAberto(true);

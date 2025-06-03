@@ -1,0 +1,13 @@
+.detail-header {
+    background-color: var(--primary-color);
+    color: white;
+    padding: 16px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.detail-back {
+    font-size: 24px;
+    cursor: pointer;
+}

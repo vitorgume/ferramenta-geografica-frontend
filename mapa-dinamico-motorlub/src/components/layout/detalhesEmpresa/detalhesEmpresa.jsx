@@ -1,6 +1,7 @@
 import './detalhesEmpresa.css';
 import { useState } from 'react';
 import { alteraStatus } from "./detalhesEmpresa.service.js";
+import HeaderDetalhesEmpresa from './header/headerDetalhesEmpresa.jsx';
 
 export default function DetalhesEmpresa({ aberto, onClose, empresa, atualizarEmpresa }) {
     const [loading, setLoading] = useState(false);
@@ -23,15 +24,10 @@ export default function DetalhesEmpresa({ aberto, onClose, empresa, atualizarEmp
   
     return (
       <div className={`detail-view ${aberto ? "active" : ""}`} id="detail-view">
-        <div className="detail-header">
-          <div className="detail-back" onClick={onClose}>
-            <i className="fas fa-arrow-left"></i>
-          </div>
-          <h2>Detalhes do Local</h2>
-        </div>
+        <HeaderDetalhesEmpresa onClose={onClose}/>
         <div className="detail-content">
           <h3 className="detail-title">{empresa.nomeFantasia}</h3>
-          <span className="detail-segment">{empresa.segmento}</span>
+          <span className="detail-segment">{empresa.segmentoDescricao}</span>
           <div className="detail-status">
             <div className="status-label">
               <div className={`status-indicator ${empresa.visitado ? "visited" : "not-visited"}`} />
