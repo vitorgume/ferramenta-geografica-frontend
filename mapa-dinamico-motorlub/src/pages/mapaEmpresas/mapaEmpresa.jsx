@@ -20,7 +20,6 @@ export default function MapaEmpresa() {
     if (!filtros) return empresas;
 
     return empresas.filter(emp => {
-        console.log('Empresa: ', emp);
         const segmento = emp.segmentoDescricao; 
         const status = emp.visitado ? 'Visitado' : 'Não Visitado';
         const regiao = emp.endereco?.regiao; 

@@ -1,20 +1,10 @@
 import './empresa.css';
-import { useState } from "react";
 import DetalhesEmpresa from '../detalhesEmpresa/detalhesEmpresa.jsx';
 
-export default function Empresa({ empresa }) {
-    const [detalhesEmpresaAberto, setDetalhesEmpresaAberto] = useState(false);
-    const [empresaSelecionada, setEmpresaSelecionada] = useState(null);
 
-    function atualizarEmpresa(empresaAtualizada) {
-        setEmpresas(empresasAntigas =>
-            empresasAntigas.map(emp =>
-                emp.id === empresaAtualizada.id ? empresaAtualizada : emp
-            )
-        );
-        setEmpresaSelecionada(empresaAtualizada); 
-    }
-
+export default function Empresa({ empresa, atualizarEmpresa, empresaSelecionada, detalhesEmpresaAberto, setDetalhesEmpresaAberto, setEmpresaSelecionada }) {
+    
+    
     return (
         <div className="list-item">
             <div className={`list-item-indicator ${empresa.visitado ? 'visited' : 'not-visited'}`}></div>

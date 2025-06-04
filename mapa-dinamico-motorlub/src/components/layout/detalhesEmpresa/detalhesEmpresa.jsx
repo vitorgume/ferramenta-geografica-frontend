@@ -14,8 +14,10 @@ export default function DetalhesEmpresa({ aberto, onClose, empresa, atualizarEmp
       setLoading(true);
       try {
         const updatedEmpresa = await alteraStatus(empresa.id);
-        atualizarEmpresa?.(updatedEmpresa); 
+        console.log("Update empresa: ", updatedEmpresa);
+        atualizarEmpresa(updatedEmpresa); 
       } catch (err) {
+        console.error('Erro ao alterar status da empresa: ', err);
         alert('Erro ao atualizar status');
       } finally {
         setLoading(false);
