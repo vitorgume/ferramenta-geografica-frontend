@@ -1,13 +1,14 @@
 import { PieChart, Pie, Cell, Legend, Tooltip } from 'recharts';
 
-const data = [
-  { name: 'Visitados', value: 70 },
-  { name: 'Não Visitados', value: 30 },
-];
-
 const COLORS = ['#00FF11', '#FF0000'];
 
-export default function GraficoPizza() {
+export default function GraficoPizza({ visitados, naoVisitados }) {
+  const data = [
+    { name: 'Visitados', value: visitados },
+    { name: 'Não Visitados', value: naoVisitados },
+  ];
+
+
   return (
     <PieChart width={300} height={300}>
       <Pie
