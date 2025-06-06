@@ -51,12 +51,14 @@ export default function MapaEmpresa() {
 
 
     useEffect(() => {
-        async function carregarEmpresas() {
-            const empresasConsulta = await consultaEmpresas();
+        const idRepresentante = localStorage.getItem('id-representante');
+
+        async function carregarEmpresas(id) {
+            const empresasConsulta = await consultaEmpresas(id);
             setEmpresas(empresasConsulta);
         }
 
-        carregarEmpresas();
+        carregarEmpresas(idRepresentante);
     }, []);
 
     return (

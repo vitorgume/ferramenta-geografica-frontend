@@ -24,6 +24,8 @@ export default function FormLogin() {
         try {
             const loginResponse = await autenticar(senha, email); 
 
+            console.log('Login response: ', loginResponse);
+
             localStorage.setItem("token", loginResponse.token);
             localStorage.setItem("id-representante", loginResponse.idRepresentante);
 
