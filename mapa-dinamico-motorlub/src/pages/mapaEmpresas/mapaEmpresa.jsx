@@ -15,22 +15,26 @@ export default function MapaEmpresa() {
     const [detalhesEmpresaAberto, setDetalhesEmpresaAberto] = useState(false);
     const [empresaSelecionada, setEmpresaSelecionada] = useState(null);
     const [filtros, setFiltros] = useState(null);
+    const [termoBusca, setTermoBusca] = useState("");
 
     function filtrarEmpresas(empresas) {
-    if (!filtros) return empresas;
+        if (!filtros && !termoBusca) return empresas;
 
-    return empresas.filter(emp => {
-        const segmento = emp.segmentoDescricao; 
-        const status = emp.visitado ? 'Visitado' : 'Não Visitado';
-        const regiao = emp.endereco?.regiao; 
+        return empresas.filter(emp => {
+            const segmento = emp.segmento?.descricao;
+            const status = emp.visitado ? 'Visitado' : 'Não Visitado';
+            const regiao = emp.endereco?.regiao;
+            const nome = emp.nomeFantasia?.toLowerCase() || '';
 
-        const matchSegmento = filtros.segmento.length === 0 || filtros.segmento.includes(segmento);
-        const matchStatus = filtros.status.length === 0 || filtros.status.includes(status);
-        const matchRegiao = filtros.regiao.length === 0 || filtros.regiao.includes(regiao);
+            const matchSegmento = !filtros || filtros.segmento.length === 0 || filtros.segmento.includes(segmento);
+            const matchStatus = !filtros || filtros.status.length === 0 || filtros.status.includes(status);
+            const matchRegiao = !filtros || filtros.regiao.length === 0 || filtros.regiao.includes(regiao);
+            const matchBusca = nome.includes(termoBusca.toLowerCase());
 
-        return matchSegmento && matchStatus && matchRegiao;
-    });
-}
+            return matchSegmento && matchStatus && matchRegiao && matchBusca;
+        });
+    }
+
 
     function handleToggleFiltro() {
         setFiltroAberto(prev => !prev);
@@ -42,7 +46,7 @@ export default function MapaEmpresa() {
                 emp.id === empresaAtualizada.id ? empresaAtualizada : emp
             )
         );
-        setEmpresaSelecionada(empresaAtualizada); 
+        setEmpresaSelecionada(empresaAtualizada);
     }
 
 
@@ -61,7 +65,9 @@ export default function MapaEmpresa() {
                 onToggleFiltro={handleToggleFiltro}
                 onToggleSearch={() => setSearchAberto(!searchAberto)}
                 searchAberto={searchAberto}
+                onSearch={setTermoBusca}
             />
+
             <FilterPanel
                 aberto={filtroAberto}
                 onClose={() => setFiltroAberto(false)}

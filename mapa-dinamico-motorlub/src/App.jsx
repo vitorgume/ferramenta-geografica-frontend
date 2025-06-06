@@ -4,6 +4,7 @@ import MapaEmpresa from './pages/mapaEmpresas/mapaEmpresa.jsx';
 import Empresas from './pages/empresas/empresas.jsx';
 import { LoadScript } from "@react-google-maps/api";
 import Estatisticas from './pages/estatisticas/estatisticas.jsx';
+import Login from './pages/login/login.jsx';
 
 
 export default function App() {  
@@ -14,6 +15,7 @@ export default function App() {
           <Route path="/" element={<MapaEmpresa />} />
           <Route path="/empresas" element={<Empresas />} />
           <Route path="/estatisticas" element={<Estatisticas />} />
+          <Route path="/login" element={<Login />} />
         </Routes>
       </Router>
     </LoadScript>
