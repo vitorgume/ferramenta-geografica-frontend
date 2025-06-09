@@ -1,7 +1,7 @@
-import axios from 'axios';
+import api from '../../utils/axios';
 
 export function consultaEmpresas() {
-    return axios.get("http://localhost:8080/empresas")
+    return api.get("/empresas")
         .then(response => response.data)
         .catch(err => {
             console.error("Erro ao carregar empresas:", err);

@@ -14,7 +14,7 @@ export default function Empresas() {
     const navigate = useNavigate();
 
     function handleClose() {
-        navigate('/');
+        navigate('/menu');
     }
 
     function atualizarEmpresa(empresaAtualizada) {

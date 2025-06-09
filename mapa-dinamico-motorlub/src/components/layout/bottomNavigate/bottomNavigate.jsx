@@ -9,8 +9,8 @@ export default function BottomNavigate() {
             <nav className="bottom-nav">
 
                 <Link
-                    to="/"
-                    className={`nav-item ${location.pathname === '/' ? 'active' : ''}`}
+                    to="/menu"
+                    className={`nav-item ${location.pathname === '/menu' ? 'active' : ''}`}
                 >
                     <i className="fas fa-map-marked-alt nav-icon"></i>
                     <span>Mapa</span>

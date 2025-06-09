@@ -9,13 +9,14 @@ export default function Estatisticas() {
     const [metricas, setMetricas] = useState({});
 
     useEffect(() => {
+        const idRepresentante = localStorage.getItem('id-representante');
+
         async function carregarMetricas(id) {
             const metricasConsultadas = await consultarMetricas(id);
-            console.log('Metricas: ', metricasConsultadas);
             setMetricas(metricasConsultadas);
         }
 
-        carregarMetricas(1);
+        carregarMetricas(idRepresentante);
     }, []);
 
     return (

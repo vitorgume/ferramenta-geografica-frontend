@@ -2,6 +2,7 @@ import { useState } from 'react';
 import './formLogin.css';
 import { autenticar } from './formLogin.service';
 import { useNavigate } from 'react-router-dom';
+import { notificarErro, notificarSucesso } from '../../../utils/notificacao';
 
 export default function FormLogin() {
     const [email, setEmail] = useState('');
@@ -29,11 +30,11 @@ export default function FormLogin() {
             localStorage.setItem("token", loginResponse.token);
             localStorage.setItem("id-representante", loginResponse.idRepresentante);
 
-            navigate('/');
+            navigate('/menu');
 
-            alert("Login realizado com sucesso!");
+            notificarSucesso("Autenticação concluida com sucesso.")
         } catch (error) {
-            alert("Credenciais inválidas");
+            notificarErro("Credências erradas !");
             console.error(error);
         }
     }
