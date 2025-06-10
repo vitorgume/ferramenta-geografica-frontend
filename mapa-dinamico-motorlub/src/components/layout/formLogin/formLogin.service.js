@@ -10,6 +10,6 @@ export function autenticar(senha, email) {
         .then(response => response.data)
         .catch(err => {
             console.error("Erro ao se autenticar:", err);
-            return []; 
+            throw err; 
         });
 }

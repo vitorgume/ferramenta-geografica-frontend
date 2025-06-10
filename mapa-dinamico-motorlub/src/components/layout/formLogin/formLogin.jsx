@@ -20,23 +20,23 @@ export default function FormLogin() {
     }
 
     async function handleSubmit(e) {
-        e.preventDefault(); 
+        e.preventDefault();
+
+        let loginResponse;
 
         try {
-            const loginResponse = await autenticar(senha, email); 
-
-            console.log('Login response: ', loginResponse);
-
-            localStorage.setItem("token", loginResponse.token);
-            localStorage.setItem("id-representante", loginResponse.idRepresentante);
-
-            navigate('/menu');
-
-            notificarSucesso("Autenticação concluida com sucesso.")
+            loginResponse = await autenticar(senha, email);
         } catch (error) {
             notificarErro("Credências erradas !");
             console.error(error);
         }
+
+        localStorage.setItem("token", loginResponse.token);
+        localStorage.setItem("id-representante", loginResponse.idRepresentante);
+
+        navigate('/menu');
+
+        notificarSucesso("Autenticação concluida com sucesso.")
     }
 
     return (
