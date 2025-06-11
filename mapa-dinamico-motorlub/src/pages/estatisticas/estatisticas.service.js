@@ -1,7 +1,6 @@
 import api from '../../utils/axios'; 
 
 export function consultarMetricas(id) {
-    console.log('Id: ', id);
     return api.get(`metricas/visitados/${id}`)
         .then(response => response.data)
         .catch(err => {

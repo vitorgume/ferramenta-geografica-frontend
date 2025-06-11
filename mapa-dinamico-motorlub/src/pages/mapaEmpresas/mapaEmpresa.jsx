@@ -5,7 +5,8 @@ import FilterPanel from "../../components/layout/filterPanel/filterPanel.jsx";
 import DetalhesEmpresa from "../../components/layout/detalhesEmpresa/detalhesEmpresa.jsx";
 import './mapaEmpresa.css';
 import { consultaEmpresas } from "./mapaEmpresa.service.js";
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
+import * as Sentry from "@sentry/react";
 
 export default function MapaEmpresa() {
 
@@ -75,13 +76,17 @@ export default function MapaEmpresa() {
                 onClose={() => setFiltroAberto(false)}
                 onApplyFilters={setFiltros}
             />
-            <Mapa
-                empresas={filtrarEmpresas(empresas)}
-                onAbrirDetalhes={(empresa) => {
-                    setEmpresaSelecionada(empresa);
-                    setDetalhesEmpresaAberto(true);
-                }}
-            />
+            
+            <Sentry.ErrorBoundary fallback={<p>Erro ao carregar o Mapa</p>}>
+                <Mapa
+                    empresas={filtrarEmpresas(empresas)}
+                    onAbrirDetalhes={(empresa) => {
+                        setEmpresaSelecionada(empresa);
+                        setDetalhesEmpresaAberto(true);
+                    }}
+                />
+            </Sentry.ErrorBoundary>
+
             <DetalhesEmpresa
                 aberto={detalhesEmpresaAberto}
                 onClose={() => setDetalhesEmpresaAberto(false)}

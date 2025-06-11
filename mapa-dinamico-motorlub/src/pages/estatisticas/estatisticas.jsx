@@ -22,20 +22,22 @@ export default function Estatisticas() {
     return (
         <div className='app-container'>
             <HeaderMapa />
-            <div className='container-metricas'>
-                <Pizza 
-                    visitados={metricas.quantidadeVisitados}
-                    naoVisitados={metricas.quantidadeNaoVisitados}
-                />
-                <div className='container-cards'>
-                    <p className='visitado-text'>
-                        Visitados: {metricas?.quantidadeVisitados ?? '--'}
-                    </p>
-                    <p className='naovisitado-text'>
-                        Não visitados: {metricas?.quantidadeNaoVisitados ?? '--'}
-                    </p>
+            <Sentry.ErrorBoundary fallback={<p>Erro ao estatísticas</p>}>
+                <div className='container-metricas'>
+                    <Pizza
+                        visitados={metricas.quantidadeVisitados}
+                        naoVisitados={metricas.quantidadeNaoVisitados}
+                    />
+                    <div className='container-cards'>
+                        <p className='visitado-text'>
+                            Visitados: {metricas?.quantidadeVisitados ?? '--'}
+                        </p>
+                        <p className='naovisitado-text'>
+                            Não visitados: {metricas?.quantidadeNaoVisitados ?? '--'}
+                        </p>
+                    </div>
                 </div>
-            </div>
+            </Sentry.ErrorBoundary>
             <BottomNavigate />
         </div>
     );

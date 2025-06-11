@@ -49,19 +49,21 @@ export default function Empresas() {
                     <i className="fas fa-times"></i>
                 </button>
             </div>
-            <div className="list-content" id="list-content">
-                {empresas.map((empresa, index) => (
-                    <Empresa
-                        key={index}
-                        empresa={empresa}
-                        detalhesEmpresaAberto={detalhesEmpresaAberto}
-                        atualizarEmpresa={atualizarEmpresa}
-                        empresaSelecionada={empresaSelecionada}
-                        setDetalhesEmpresaAberto={setDetalhesEmpresaAberto}
-                        setEmpresaSelecionada={setEmpresaSelecionada}
-                    />
-                ))}
-            </div>
+            <Sentry.ErrorBoundary fallback={<p>Erro ao carregar empresas</p>}>
+                <div className="list-content" id="list-content">
+                    {empresas.map((empresa, index) => (
+                        <Empresa
+                            key={index}
+                            empresa={empresa}
+                            detalhesEmpresaAberto={detalhesEmpresaAberto}
+                            atualizarEmpresa={atualizarEmpresa}
+                            empresaSelecionada={empresaSelecionada}
+                            setDetalhesEmpresaAberto={setDetalhesEmpresaAberto}
+                            setEmpresaSelecionada={setEmpresaSelecionada}
+                        />
+                    ))}
+                </div>
+            </Sentry.ErrorBoundary>
         </div>
     );
 }
