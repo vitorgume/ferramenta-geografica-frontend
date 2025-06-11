@@ -77,18 +77,6 @@ export default function FormLogin() {
                     </div>
                 </div>
 
-                <div className="forgot-password">
-                    <a
-                        href="#"
-                        onClick={(e) => {
-                            e.preventDefault();
-                            alert("Funcionalidade em desenvolvimento");
-                        }}
-                    >
-                        Esqueceu a senha?
-                    </a>
-                </div>
-
                 <button type="submit" className="login-button" id="loginBtn">
                     Entrar
                 </button>
