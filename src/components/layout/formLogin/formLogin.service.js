@@ -6,7 +6,7 @@ export function autenticar(senha, telefone) {
         senha: senha
     }
 
-    const baseURL = import.meta.env.BASE_URL;
+    const baseURL = import.meta.env.VITE_BASE_URL;
 
     return axios.post(`${baseURL}/login`, loginDto)
         .then(response => response.data)
