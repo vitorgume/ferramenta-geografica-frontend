@@ -22,7 +22,6 @@ export default function Estatisticas() {
     return (
         <div className='app-container'>
             <HeaderMapa />
-            <Sentry.ErrorBoundary fallback={<p>Erro ao estatísticas</p>}>
                 <div className='container-metricas'>
                     <Pizza
                         visitados={metricas.quantidadeVisitados}
@@ -37,7 +36,6 @@ export default function Estatisticas() {
                         </p>
                     </div>
                 </div>
-            </Sentry.ErrorBoundary>
             <BottomNavigate />
         </div>
     );

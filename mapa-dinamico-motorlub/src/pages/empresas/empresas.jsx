@@ -49,7 +49,6 @@ export default function Empresas() {
                     <i className="fas fa-times"></i>
                 </button>
             </div>
-            <Sentry.ErrorBoundary fallback={<p>Erro ao carregar empresas</p>}>
                 <div className="list-content" id="list-content">
                     {empresas.map((empresa, index) => (
                         <Empresa
@@ -63,7 +62,6 @@ export default function Empresas() {
                         />
                     ))}
                 </div>
-            </Sentry.ErrorBoundary>
         </div>
     );
 }

@@ -12,51 +12,15 @@ const defaultCenter = {
 };
 
 const icpSVGs = {
-    'a+': `
-        <g transform="translate(0, 0)">
-            <text x="0" y="0" font-family="Arial, sans-serif" font-size="24" font-weight="bold" fill="#2d5016">A+</text>
-        </g>
-    `,
-    'b+': `
-        <g transform="translate(0, 0)">
-            <text x="0" y="0" font-family="Arial, sans-serif" font-size="24" font-weight="bold" fill="#4a7c59">B+</text>
-        </g>
-    `,
-    'c+': `
-        <g transform="translate(0, 0)">
-            <text x="0" y="0" font-family="Arial, sans-serif" font-size="24" font-weight="bold" fill="#8b6914">C+</text>
-        </g>
-    `,
-    'a': `
-        <g transform="translate(0, 0)">
-            <text x="0" y="0" font-family="Arial, sans-serif" font-size="24" font-weight="bold" fill="#2d5016">A</text>
-        </g>
-    `,
-    'b': `
-        <g transform="translate(0, 0)">
-            <text x="0" y="0" font-family="Arial, sans-serif" font-size="24" font-weight="bold" fill="#4a7c59">B</text>
-        </g>
-    `,
-    'c': `
-        <g transform="translate(0, 0)">
-            <text x="0" y="0" font-family="Arial, sans-serif" font-size="24" font-weight="bold" fill="#8b6914">C</text>
-        </g>
-    `,
-    'a-': `
-        <g transform="translate(0, 0)">
-            <text x="0" y="0" font-family="Arial, sans-serif" font-size="24" font-weight="bold" fill="#2d5016">A-</text>
-        </g>
-    `,
-    'b-': `
-        <g transform="translate(0, 0)">
-            <text x="0" y="0" font-family="Arial, sans-serif" font-size="24" font-weight="bold" fill="#4a7c59">B-</text>
-        </g>
-    `,
-    'c-': `
-        <g transform="translate(0, 0)">
-            <text x="0" y="0" font-family="Arial, sans-serif" font-size="24" font-weight="bold" fill="#8b6914">C-</text>
-        </g>
-    `
+    'a+': `<text x="18" y="24" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="#2d5016" text-anchor="middle">A+</text>`,
+    'b+': `<text x="18" y="24" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="#4a7c59" text-anchor="middle">B+</text>`,
+    'c+': `<text x="18" y="24" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="#8b6914" text-anchor="middle">C+</text>`,
+    'a': `<text x="18" y="24" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="#2d5016" text-anchor="middle">A</text>`,
+    'b': `<text x="18" y="24" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="#4a7c59" text-anchor="middle">B</text>`,
+    'c': `<text x="18" y="24" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="#8b6914" text-anchor="middle">C</text>`,
+    'a-': `<text x="18" y="24" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="#2d5016" text-anchor="middle">A-</text>`,
+    'b-': `<text x="18" y="24" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="#4a7c59" text-anchor="middle">B-</text>`,
+    'c-': `<text x="18" y="24" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="#8b6914" text-anchor="middle">C-</text>`
 };
 
 const createSVGIcon = (segmentKey, isVisited) => {
@@ -66,17 +30,10 @@ const createSVGIcon = (segmentKey, isVisited) => {
 
     const svg = `
         <svg width="60" height="60" viewBox="0 0 36 36" xmlns="http://www.w3.org/2000/svg">
-            <!-- Círculo de fundo com cor baseada no status -->
-            <circle cx="18" cy="18" r="16" fill="${backgroundColor}" 
-                    stroke="${borderColor}" stroke-width="3"/>
-            
-            <!-- Ícone do segmento -->
-            ${segmentSVG}
-            
-            <!-- Pequeno indicador no canto superior direito -->
+            <circle cx="18" cy="18" r="16" fill="${backgroundColor}" stroke="${borderColor}" stroke-width="3"/>
+                ${segmentSVG}
             <circle cx="28" cy="8" r="6" fill="${borderColor}"/>
-            <text x="28" y="11" text-anchor="middle" fill="white" 
-                  font-family="Arial" font-size="8" font-weight="bold">
+            <text x="28" y="11" text-anchor="middle" fill="white" font-family="Arial" font-size="8" font-weight="bold">
                 ${isVisited ? '✓' : '!'}
             </text>
         </svg>
@@ -93,11 +50,13 @@ const createSVGIcon = (segmentKey, isVisited) => {
 const getMarkerIcon = (empresa) => {
     const icpKey = empresa.descricaoNivelIcp ? empresa.descricaoNivelIcp.toLowerCase() : null;
 
+
     if (icpKey && icpSVGs[icpKey]) {
-        return createSVGIcon(icpKey, empresa.visitado || false);
+        const icon = createSVGIcon(icpKey, empresa.visitado || false);
+        console.log(icon);
+        return icon;
     }
 
-    // Ícone padrão
     const defaultSvg = `
         <svg width="32" height="32" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
             <circle cx="16" cy="16" r="14" fill="#6B7280" stroke="#fff" stroke-width="2"/>

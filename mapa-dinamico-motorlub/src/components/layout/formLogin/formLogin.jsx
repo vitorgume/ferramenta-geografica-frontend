@@ -31,6 +31,8 @@ export default function FormLogin() {
             console.error(error);
         }
 
+        console.log('Login response: ', loginResponse.token, loginResponse.idRepresentante);
+
         localStorage.setItem("token", loginResponse.token);
         localStorage.setItem("id-representante", loginResponse.idRepresentante);
 

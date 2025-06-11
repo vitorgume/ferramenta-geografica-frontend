@@ -76,16 +76,14 @@ export default function MapaEmpresa() {
                 onClose={() => setFiltroAberto(false)}
                 onApplyFilters={setFiltros}
             />
-            
-            <Sentry.ErrorBoundary fallback={<p>Erro ao carregar o Mapa</p>}>
-                <Mapa
-                    empresas={filtrarEmpresas(empresas)}
-                    onAbrirDetalhes={(empresa) => {
-                        setEmpresaSelecionada(empresa);
-                        setDetalhesEmpresaAberto(true);
-                    }}
-                />
-            </Sentry.ErrorBoundary>
+
+            <Mapa
+                empresas={filtrarEmpresas(empresas)}
+                onAbrirDetalhes={(empresa) => {
+                    setEmpresaSelecionada(empresa);
+                    setDetalhesEmpresaAberto(true);
+                }}
+            />
 
             <DetalhesEmpresa
                 aberto={detalhesEmpresaAberto}
