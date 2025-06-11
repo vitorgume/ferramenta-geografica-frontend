@@ -53,7 +53,6 @@ const getMarkerIcon = (empresa) => {
 
     if (icpKey && icpSVGs[icpKey]) {
         const icon = createSVGIcon(icpKey, empresa.visitado || false);
-        console.log(icon);
         return icon;
     }
 
