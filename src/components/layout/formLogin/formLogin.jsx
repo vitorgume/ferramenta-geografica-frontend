@@ -48,7 +48,6 @@ export default function FormLogin() {
                         type="text"
                         id="telefone"
                         className="form-input"
-                        placeholder="5544..."
                         value={telefone}
                         onChange={(e) => setTelefone(e.target.value)}
                         required
@@ -62,7 +61,6 @@ export default function FormLogin() {
                             type="password"
                             id="password"
                             className="form-input"
-                            placeholder="••••••••"
                             value={senha}
                             onChange={(e) => setSenha(e.target.value)}
                             required
