@@ -1,8 +1,8 @@
 import axios from 'axios';
 
-export function autenticar(senha, email) {
+export function autenticar(senha, telefone) {
     const loginDto = {
-        email: email,
+        telefone: telefone,
         senha: senha
     }
 
