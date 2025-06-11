@@ -1,4 +1,4 @@
-import './HeaderDetalhesEmpresa.css';
+import './headerDetalhesEmpresa.css';
 
 export default function HeaderDetalhesEmpresa({ onClose }) {
     return (
